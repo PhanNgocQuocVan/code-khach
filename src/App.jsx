@@ -1,16 +1,18 @@
-import React from 'react';
-import HeroSection from './components/HeroSection';
-import ProblemsSection from './components/ProblemsSection';
-import WheelSection from './components/WheelSection';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import React from "react";
+import HeroSection from "./components/HeroSection";
+import ProblemsSection from "./components/ProblemsSection";
+import WheelSection from "./components/WheelSection";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import FloatingShapes from "./components/FloatingShapes";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-red-50 via-yellow-50 to-red-50">
+    <div className="min-h-screen bg-linear-to-b from-green-50 via-green-100 to-green-50">
+      <FloatingShapes />
       {/* Bạn có thể thêm Header nếu muốn */}
       <Header />
-      
+
       <main>
         <HeroSection />
         <ProblemsSection />
@@ -23,4 +25,4 @@ function App() {
   );
 }
 
-export default App;   
+export default App;

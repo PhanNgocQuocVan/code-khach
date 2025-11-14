@@ -17,7 +17,7 @@ body {
   background-position: center;
 }
 .bg-vongquay {
-  background-image: url("../src/assets/vongquay.jpg");
+  background-image: url("../src/assets/WEB-09.png");
   background-size: cover;
   background-position: center;
 }
@@ -30,6 +30,21 @@ body {
   50% {
     transform: translateY(-10px);
   }
+}
+
+/* Slightly larger vertical float used by FloatingShapes */
+@keyframes floatY {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-16px);
+  }
+}
+
+.animate-floatY {
+  animation: floatY 6s ease-in-out infinite;
 }
 
 @keyframes heartbeat {
@@ -51,4 +66,18 @@ body {
 
 .animate-heartbeat {
   animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+/* Zoom (scale) animation for promo CTA button */
+@keyframes zoom {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+.animate-zoom {
+  animation: zoom 1s ease-in-out infinite;
 }
