@@ -37,7 +37,7 @@ const WheelSection = () => {
   };
 
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-blue-50 to-blue-100">
+    <section className="py-20 px-4 bg-gradient-to-b from-red-100 to-yellow-50">
       <div className="container mx-auto max-w-5xl text-center">
         <h2 className="text-3xl font-bold text-gray-800 mb-6">
           🎡 Vòng Quay May Mắn
@@ -128,7 +128,7 @@ const WheelSection = () => {
           <button
             onClick={handleSpin}
             disabled={isSpinning}
-            className="px-8 py-3 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-bold rounded-lg shadow-lg transition-all transform hover:scale-105 disabled:cursor-not-allowed"
+            className="px-8 py-3 bg-red-600 hover:bg-red-700 disabled:bg-gray-400 text-white font-bold rounded-lg shadow-lg transition-all transform hover:scale-105 disabled:cursor-not-allowed"
           >
             {isSpinning ? '⏳ Đang quay...' : '🎯 Quay Ngay'}
           </button>

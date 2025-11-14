@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-gray-300 py-8 px-4">
+    <footer className="bg-red-700 text-white py-8 px-4 border-t-4 border-yellow-400">
       <div className="container mx-auto max-w-5xl text-center">
         {/* Bạn có thể thêm các liên kết nhanh nếu muốn */}
         <div className="flex justify-center space-x-6 mb-4">

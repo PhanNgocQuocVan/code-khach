@@ -10,8 +10,8 @@ const HeroSection = () => {
   ];
 
   return (
-    <section className="bg-blue-600 text-white py-20 px-4">
-      <div className="container mx-auto max-w-4xl text-center">
+    <section className="bg-red-600 text-white py-20 px-4">
+      <div className="container mx-auto max-w-4xl text-center relative z-10">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">
           Khóa học Tiếng Trung sỉ số nhỏ phát triển toàn diện Nghe - Nói - Đọc - Viết - Dịch
         </h1>
@@ -20,7 +20,7 @@ const HeroSection = () => {
         </p>
 
         <div className="flex justify-center mb-10">
-          <ul className="text-left space-y-3">
+          <ul className="text-left space-y-4 max-w-2xl">
             {keyFeatures.map((feature, index) => (
               <li key={index} className="flex items-center">
                 <svg className="w-6 h-6 text-green-400 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>

@@ -21,7 +21,7 @@ const problems = [
 
 const ProblemsSection = () => {
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-20 px-4 bg-gradient-to-b from-yellow-100 to-white">
       <div className="container mx-auto max-w-5xl">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-12">
           Bạn thấy cơ hội lương cao thưởng tốt với tiếng Trung nhưng... <br />

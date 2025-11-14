@@ -7,7 +7,7 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-red-50 via-yellow-50 to-red-50">
       {/* Bạn có thể thêm Header nếu muốn */}
       <Header />
       
