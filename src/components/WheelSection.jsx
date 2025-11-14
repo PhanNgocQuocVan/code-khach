@@ -1,10 +1,66 @@
-import React, { useState } from "react";
-import { Gift } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Gift, X } from "lucide-react";
+
+// Component Confetti (Pháo hoa)
+const Confetti = ({ count = 50 }) => {
+  const [particles, setParticles] = useState([]);
+
+  useEffect(() => {
+    const newParticles = Array.from({ length: count }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      delay: Math.random() * 0.3,
+      duration: 2 + Math.random() * 1,
+      size: 5 + Math.random() * 10,
+      color: ["#FF6B6B", "#4ECDC4", "#FFE66D", "#95E1D3", "#C7CEEA", "#FF85A2"][
+        Math.floor(Math.random() * 6)
+      ],
+    }));
+    setParticles(newParticles);
+
+    const timer = setTimeout(() => setParticles([]), 3000);
+    return () => clearTimeout(timer);
+  }, [count]);
+
+  return (
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="absolute animate-confetti"
+          style={{
+            left: `${particle.left}%`,
+            top: "-10px",
+            width: `${particle.size}px`,
+            height: `${particle.size}px`,
+            backgroundColor: particle.color,
+            borderRadius: "50%",
+            animation: `confetti-fall ${particle.duration}s linear forwards`,
+            animationDelay: `${particle.delay}s`,
+          }}
+        />
+      ))}
+      <style>{`
+        @keyframes confetti-fall {
+          0% {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(100vh) rotate(720deg);
+          }
+        }
+      `}</style>
+    </div>
+  );
+};
 
 const WheelSection = () => {
   const [rotation, setRotation] = useState(0);
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState(null);
+  const [showConfetti, setShowConfetti] = useState(false);
 
   const prizes = [
     { id: 1, name: "Giảm giá 10%", color: "#FF6B6B" },
@@ -13,6 +69,12 @@ const WheelSection = () => {
     { id: 4, name: "Tặng sách", color: "#95E1D3" },
     { id: 5, name: "Giảm giá 15%", color: "#C7CEEA" },
     { id: 6, name: "Voucher 500k", color: "#FF85A2" },
+    { id: 7, name: "Voucher 500k", color: "#A8E6CF" },
+    { id: 8, name: "Voucher 500k", color: "#FFD3B6" },
+    { id: 9, name: "Voucher 500k", color: "#FFAAA5" },
+    { id: 10, name: "Voucher 500k", color: "#FF8B94" },
+    { id: 11, name: "Voucher 500k", color: "#AA96DA" },
+    { id: 12, name: "Voucher 500k", color: "#FCBAD3" },
   ];
 
   const handleSpin = () => {
@@ -34,6 +96,7 @@ const WheelSection = () => {
       const sectionIndex =
         Math.floor((360 - normalizedDegree) / 60) % prizes.length;
       setResult(prizes[sectionIndex]);
+      setShowConfetti(true);
       setIsSpinning(false);
     }, 3000);
   };
@@ -41,13 +104,12 @@ const WheelSection = () => {
   return (
     <section className="bg-vongquay py-20 px-4 bg-cover bg-center relative">
       {/* Overlay to make content stand out */}
-      <div className="absolute inset-0 bg-black/40"></div>
 
       <div className="container mx-auto max-w-5xl text-center relative z-10">
-        <h2 className="text-3xl font-bold text-white mb-6">
+        <h2 className="text-4xl font-bold text-[#018150] mb-6">
           🎡 Vòng Quay May Mắn
         </h2>
-        <p className="text-white mb-6">
+        <p className="text-[#018150] mb-6">
           Quay vòng quay để nhận phần quà hấp dẫn từ chúng tôi!
         </p>
 
@@ -65,8 +127,8 @@ const WheelSection = () => {
 
             {/* Vòng quay SVG */}
             <svg
-              width="400"
-              height="400"
+              width="600"
+              height="600"
               viewBox="0 0 400 400"
               className="drop-shadow-lg"
               style={{
@@ -156,16 +218,78 @@ const WheelSection = () => {
             {isSpinning ? "⏳ Đang quay..." : "🎯 Quay Ngay"}
           </button>
 
-          {/* Kết quả */}
+          {/* Kết quả - Popup Modal */}
           {result && (
-            <div className="mt-8 p-6 bg-white rounded-lg shadow-lg border-4 border-green-600">
-              <p className="text-gray-600 text-lg mb-2">Bạn đã trúng:</p>
-              <p className="text-4xl font-bold text-green-600">{result.name}</p>
-              <p className="text-gray-500 mt-2">🎉 Chúc mừng bạn!</p>
-            </div>
+            <>
+              {showConfetti && <Confetti count={80} />}
+              <div className="fixed inset-0 bg-gray-500/60 bg-opacity-50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-2xl shadow-2xl p-12 max-w-md w-full mx-4 transform transition-all animate-popup">
+                  <button
+                    onClick={() => {
+                      setResult(null);
+                      setShowConfetti(false);
+                    }}
+                    className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+
+                  <div className="text-center">
+                    <div className="text-6xl mb-4 animate-bounce">🎉</div>
+                    <h3 className="text-2xl font-bold text-gray-800 mb-3">
+                      Chúc mừng bạn!
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-4">Bạn đã trúng:</p>
+                    <div
+                      className="rounded-lg p-4 mb-6"
+                      style={{
+                        backgroundColor: result.color + "20",
+                        borderLeft: `6px solid ${result.color}`,
+                      }}
+                    >
+                      <p
+                        className="text-4xl font-bold"
+                        style={{ color: result.color }}
+                      >
+                        {result.name}
+                      </p>
+                    </div>
+                    <p className="text-gray-500 text-sm mb-6">
+                      ✨ Cảm ơn bạn đã tham gia!
+                    </p>
+                    <button
+                      onClick={() => {
+                        setResult(null);
+                        setShowConfetti(false);
+                      }}
+                      className="px-8 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all transform hover:scale-105"
+                    >
+                      Quay tiếp
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </>
           )}
         </div>
       </div>
+
+      <style>{`
+        @keyframes popup {
+          0% {
+            opacity: 0;
+            transform: scale(0.5) translateY(-50px);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        .animate-popup {
+          animation: popup 0.5s ease-out;
+        }
+      `}</style>
     </section>
   );
 };
